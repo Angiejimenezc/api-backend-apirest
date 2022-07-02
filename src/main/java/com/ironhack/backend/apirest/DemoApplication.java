@@ -26,7 +26,6 @@ public class DemoApplication implements CommandLineRunner {
 
 		Client client = new Client("Juan", "Perez", "profesor@ideas.com", new Date());
 		clientRepository.save(client);
-
 		Client client1 = new Client("Mr. John", "Doe", "john.doe@gmail.com", new Date());
 		clientRepository.save(client1);
 		Client client2 = new Client("Linus", "Torvalds", "linus.torvalds@gmail.com", new Date());
