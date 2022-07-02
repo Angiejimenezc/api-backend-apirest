@@ -18,6 +18,15 @@ public class Client implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date createAt;
 
+    public Client() {
+    }
+
+    public Client(String name, String surname, String email, Date createAt) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.createAt = createAt;
+    }
 
     public long getId() {
         return id;
