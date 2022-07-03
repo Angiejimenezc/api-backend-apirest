@@ -17,4 +17,20 @@ public class ClientService implements IClientService {
     public List<Client> findAll() {
         return (List<Client>) clientRepository.findAll();
     }
+
+    @Override
+    public Client findById(Long id) {
+        return clientRepository.findById(id).orElse(null); // if not found, return null
+    }
+
+    @Override
+    public Client save(Client client) {
+        return clientRepository.save(client);
+    }
+
+    @Override
+    public void delete(Long id) {
+        clientRepository.deleteById(id);
+
+    }
 }
