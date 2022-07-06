@@ -38,6 +38,14 @@ public class DemoApplication implements CommandLineRunner {
 		clientRepository.save(client5);
 		Client client6 = new Client("Ralph", "Johnson", "ralph.johnson@gmail.com", new Date());
 		clientRepository.save(client6);
+		Client client7 = new Client("Ralph", "Johnson", "ralph.johnson@gmail.com", new Date());
+		clientRepository.save(client7);
+		Client client8 = new Client("Ralph", "Johnson", "ralph.johnson@gmail.com", new Date());
+		clientRepository.save(client8);
+		Client client9 = new Client("Ralph", "Johnson", "ralph.johnson@gmail.com", new Date());
+		clientRepository.save(client9);
+		Client client10 = new Client("Ralph", "Johnson", "ralph.johnson@gmail.com", new Date());
+		clientRepository.save(client10);
 
 
 		System.out.println("Clients: OK ");
