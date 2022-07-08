@@ -2,8 +2,6 @@ package com.ironhack.backend.apirest.controller;
 import com.ironhack.backend.apirest.models.Client;
 import com.ironhack.backend.apirest.service.IClientService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -44,8 +42,7 @@ public class ClientController {
     @PostMapping("/clients")
     @ResponseStatus(HttpStatus.CREATED)
     public Client create(@Valid @RequestBody Client client) {
-        client.setCreateAt(new Date());
-        return clientService.save(client);
+           return clientService.save(client);
     }
 
     @CrossOrigin
@@ -65,18 +62,6 @@ public class ClientController {
     public void delete(@PathVariable Long id) {
         Client client = clientService.findById(id);
         clientService.delete(id);
-
-        /*  Eliminamos el fichero de la carpeta uploads
-        String fileNamePrev = client.getPhoto();
-        if(fileNamePrev != null && fileNamePrev.length() > 0){
-            Path rutaFileNamePre = Paths.get("uploads").resolve(fileNamePrev).toAbsolutePath();
-            File fileNamePre = rutaFileNamePre.toFile();
-            if(fileNamePre.exists() && fileNamePre.canRead()){
-                fileNamePre.delete();
-            }
-        }
-        */
-
     }
     @PostMapping("/clients/upload")
     public ResponseEntity<?> upload(@RequestParam ("file") MultipartFile file, @RequestParam ("id") Long id) {

@@ -22,13 +22,10 @@ public class Client implements Serializable {
     @NotEmpty
     @Size(min =4 , max = 50)
     private String name;
-
     @NotEmpty
     private String surname;
-
     @Email
     private String email;
-
 
     @NotNull(message = "Date cannot be null")
     @Column(name= "create_at")
