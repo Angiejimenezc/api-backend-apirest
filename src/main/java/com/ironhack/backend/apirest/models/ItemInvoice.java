@@ -1,5 +1,6 @@
 package com.ironhack.backend.apirest.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -10,9 +11,11 @@ public class ItemInvoice implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String description;
+
     private Integer quantity;
 
+
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="product_id")
     private Product product;   // producto que se va a vender
@@ -21,11 +24,9 @@ public class ItemInvoice implements Serializable {
     public ItemInvoice() {
     }
 
-    public ItemInvoice(Long id, String description, Integer quantity, Double unitPrice, Double totalPrice) {
-        this.id = id;
-        this.description = description;
+    public ItemInvoice(Integer quantity, Product product) {
         this.quantity = quantity;
-
+        this.product = product;
     }
 
     public Long getId() {
@@ -36,22 +37,6 @@ public class ItemInvoice implements Serializable {
         this.id = id;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
-
     public Product getProduct() {
         return product;
     }
@@ -60,6 +45,12 @@ public class ItemInvoice implements Serializable {
         this.product = product;
     }
 
+    public Integer getQuantity() {
+        return quantity;
+    }
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
     public Double getPrice() {
         return quantity.doubleValue() * product.getPrice();
     }
@@ -68,9 +59,8 @@ public class ItemInvoice implements Serializable {
     public String toString() {
         return "ItemInvoice{" +
                 "id=" + id +
-                ", description='" + description + '\'' +
                 ", quantity=" + quantity +
-
+                ", product=" + product +
                 '}';
     }
 }

@@ -1,9 +1,6 @@
 package com.ironhack.backend.apirest;
 
-import com.ironhack.backend.apirest.models.Client;
-import com.ironhack.backend.apirest.models.Invoice;
-import com.ironhack.backend.apirest.models.Product;
-import com.ironhack.backend.apirest.models.User;
+import com.ironhack.backend.apirest.models.*;
 import com.ironhack.backend.apirest.repository.ClientRepository;
 import com.ironhack.backend.apirest.repository.InvoiceRepository;
 import com.ironhack.backend.apirest.repository.ProductRepository;
@@ -71,7 +68,8 @@ public class DemoApplication implements CommandLineRunner {
 		Invoice invoice4 = new Invoice ( "description", "esta es una Obs", Date.from(Instant.now()),client4);
 		invoiceRepository.save(invoice4);
 
-				System.out.println("Invoice: OK ");
+		System.out.println("Invoices: OK ");
+
 
 		Product product = new Product();
 		product.setName("Product 1");
@@ -94,6 +92,32 @@ public class DemoApplication implements CommandLineRunner {
 		productRepository.save(product3);
 
 		System.out.println("Product: OK ");
+
+
+
+		ItemInvoice itemInvoice = new ItemInvoice ();
+		itemInvoice.setQuantity(1);
+		itemInvoice.setProduct(product);
+		invoiceRepository.save(invoice);
+
+
+
+		ItemInvoice itemInvoice1 = new ItemInvoice ();
+		itemInvoice1.setQuantity(2);
+		itemInvoice1.setProduct(product1);
+		invoiceRepository.save(invoice1);
+
+		ItemInvoice itemInvoice2 = new ItemInvoice ();
+		itemInvoice2.setQuantity(3);
+		itemInvoice2.setProduct(product2);
+		invoiceRepository.save(invoice2);
+
+		ItemInvoice itemInvoice3 = new ItemInvoice ();
+		itemInvoice3.setQuantity(4);
+		itemInvoice3.setProduct(product3);
+		invoiceRepository.save(invoice3);
+
+		System.out.println("itemsInvoice: OK ");
 
 		User user = new User("admin", "admin");
 		userRepository.save(user);

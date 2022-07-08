@@ -1,8 +1,11 @@
 package com.ironhack.backend.apirest.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -24,7 +27,10 @@ public class Invoice implements Serializable {  // implements Serializable to be
    }
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private Client client;
+
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "invoice_id")
     private List<ItemInvoice> items = new ArrayList<>();
@@ -37,7 +43,10 @@ public class Invoice implements Serializable {  // implements Serializable to be
         this.observation = observation;
         this.createAt = createAt;
         this.client = client;
+        this.items = new ArrayList<>();
     }
+
+
 
     public Long getId() {
         return id;

@@ -1,5 +1,7 @@
 package com.ironhack.backend.apirest.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -35,11 +37,13 @@ public class Client implements Serializable {
 
     private String photo;
 
+    @JsonIgnore
     @OneToMany (mappedBy = "client", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Invoice> invoices;
 
     public Client() {
     }
+
 
     public Client(String name, String surname, String email, Date createAt) {
         this.name = name;

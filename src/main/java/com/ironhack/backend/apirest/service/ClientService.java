@@ -4,6 +4,8 @@ import com.ironhack.backend.apirest.models.Client;
 import com.ironhack.backend.apirest.models.Invoice;
 import com.ironhack.backend.apirest.models.Product;
 import com.ironhack.backend.apirest.repository.ClientRepository;
+import com.ironhack.backend.apirest.repository.InvoiceRepository;
+import com.ironhack.backend.apirest.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,12 @@ public class ClientService implements IClientService {
 
     @Autowired
     private ClientRepository clientRepository;
+
+    @Autowired
+    private InvoiceRepository invoiceRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
 
     @Override
     public List<Client> findAll() {
@@ -38,21 +46,23 @@ public class ClientService implements IClientService {
 
     @Override
     public Invoice findInvoiceById(Long id) {
-        return null;
+        return invoiceRepository.findById(id).orElse(null);
     }
 
     @Override
     public Invoice saveInvoice(Invoice invoice) {
-        return null;
+        return invoiceRepository.save(invoice);
     }
 
     @Override
     public void deleteInvoiceById(Long id) {
+        invoiceRepository.deleteById(id);
 
     }
 
     @Override
     public List<Product> findProductByName(String term) {
-        return null;
+        return productRepository.findByNameContainingIgnoreCase(term); // ignore case
+
     }
 }
