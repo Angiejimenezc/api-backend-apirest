@@ -1,8 +1,14 @@
 package com.ironhack.backend.apirest.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Client implements Serializable {
@@ -11,12 +17,26 @@ public class Client implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotEmpty
+    @Size(min =4 , max = 50)
     private String name;
+
+    @NotEmpty
     private String surname;
+
+    @Email
     private String email;
+
+
+    @NotNull(message = "Date cannot be null")
     @Column(name= "create_at")
     @Temporal(TemporalType.DATE)
     private Date createAt;
+
+    private String photo;
+
+    @OneToMany (mappedBy = "client", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Invoice> invoices;
 
     public Client() {
     }
@@ -26,8 +46,24 @@ public class Client implements Serializable {
         this.surname = surname;
         this.email = email;
         this.createAt = createAt;
+        this.photo = "";
+        this.invoices = new ArrayList<>();
     }
 
+    public List<Invoice> getInvoice() {
+        return invoices;
+    }
+
+    public void setInvoice(List<Invoice> invoices) {
+        this.invoices = invoices;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
     public long getId() {
         return id;
     }
