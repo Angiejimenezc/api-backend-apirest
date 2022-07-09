@@ -11,8 +11,13 @@ import java.io.Serializable;
         @Id
         @GeneratedValue(strategy= GenerationType.IDENTITY)
         private Long id;
+
         @Column(unique=true, length=20)
         private String name;
+
+        public Role() {
+        }
+
         public Long getId() {
             return id;
         }

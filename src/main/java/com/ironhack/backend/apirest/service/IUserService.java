@@ -4,5 +4,5 @@ import com.ironhack.backend.apirest.models.User;
 
 public interface IUserService {
     public User findByUsername(String username);
-
 }
+

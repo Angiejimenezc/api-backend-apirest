@@ -61,10 +61,18 @@
 			<artifactId>springdoc-openapi-ui</artifactId>
 			<version>1.6.4</version>
 		</dependency>
-
-
+		<dependency>
+			<groupId>com.github.nyla-solutions</groupId>
+			<artifactId>gedi-geode-spring-security</artifactId>
+			<version>0.0.1</version>
+			<scope>import</scope>
+		</dependency>
 	</dependencies>
-
+	<dependency>
+		<groupId>org.springframework.security</groupId>
+		<artifactId>spring-security-core</artifactId>
+		<version>5.7.2</version>
+	</dependency>
 
 
 	<build>

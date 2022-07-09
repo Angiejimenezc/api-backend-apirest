@@ -25,6 +25,8 @@ public class DemoApplication implements CommandLineRunner {
 	InvoiceRepository invoiceRepository;
 	@Autowired
 	UserRepository userRepository;
+	@Autowired
+
 
 
 
@@ -116,11 +118,6 @@ public class DemoApplication implements CommandLineRunner {
 		invoiceRepository.save(invoice3);
 
 		System.out.println("itemsInvoice: OK ");
-
-		User user = new User("admin", "admin");
-		userRepository.save(user);
-		User user1 = new User("admin1", "admin1");
-		userRepository.save(user1);
 
 		System.out.println("User: OK ");
 
