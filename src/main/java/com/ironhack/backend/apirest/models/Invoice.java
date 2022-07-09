@@ -20,12 +20,12 @@ public class Invoice implements Serializable {  // implements Serializable to be
     @Column(name = "invoice_date")
     @Temporal(TemporalType.DATE)
     private Date createAt;
-
+/*
    @PrePersist   // se llama a este método antes de guardar la entidad en la base de datos
     public void prePersist() {
        this.createAt = new Date();
    }
-
+*/
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     private Client client;

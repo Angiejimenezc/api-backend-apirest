@@ -100,8 +100,6 @@ public class DemoApplication implements CommandLineRunner {
 		itemInvoice.setProduct(product);
 		invoiceRepository.save(invoice);
 
-
-
 		ItemInvoice itemInvoice1 = new ItemInvoice ();
 		itemInvoice1.setQuantity(2);
 		itemInvoice1.setProduct(product1);

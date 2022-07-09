@@ -19,15 +19,15 @@ public class Client implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotEmpty
+    @NotEmpty(message = "El Nombre no puede estar Vacio")
     @Size(min =4 , max = 50)
     private String name;
-    @NotEmpty
+    @NotEmpty(message = "El Nombre no puede estar Vacio")
     private String surname;
     @Email
     private String email;
 
-    @NotNull(message = "Date cannot be null")
+    @NotNull(message = "La fecha no puede estar vacia")
     @Column(name= "create_at")
     @Temporal(TemporalType.DATE)
     private Date createAt;

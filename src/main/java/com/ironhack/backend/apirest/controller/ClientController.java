@@ -30,7 +30,6 @@ public class ClientController {
     public List<Client> index() {
         return clientService.findAll();
     }
-
     @CrossOrigin
     @GetMapping("/clients/{id}")
     @ResponseStatus(HttpStatus.OK)
@@ -63,29 +62,53 @@ public class ClientController {
         Client client = clientService.findById(id);
         clientService.delete(id);
     }
+    // Upload Photo
+    @CrossOrigin
     @PostMapping("/clients/upload")
+    //ResponseEntity
     public ResponseEntity<?> upload(@RequestParam ("file") MultipartFile file, @RequestParam ("id") Long id) {
        Map<String, Object> response = new HashMap<>();
-
-
-        Client client = clientService.findById(id);  //Obtenemos el cliente a partir del id
-
+        //Obtenemos el cliente a partir del id
+        Client client = clientService.findById(id);
+        //Valido si es distinto
         if(!file.isEmpty()){
-         String fileName = UUID.randomUUID().toString() + "-" + file.getOriginalFilename(); //Generamos un nombre aleatorio para el fichero
-         Path rutaFileName = Paths.get("uploads").resolve(fileName).toAbsolutePath(); //Generamos la ruta del fichero
+        //Generamos un nombre aleatorio para el fichero con UUID
+         String fileName = UUID.randomUUID().toString() + "-" + file.getOriginalFilename().replace(" "," ");
+        //Generamos la ruta del fichero y resolvemos
+         Path rutaFileName = Paths.get("uploads").resolve(fileName).toAbsolutePath();
+        //Guardamos el fichero en la ruta
          File fileNameFile = rutaFileName.toFile();
-        try { //Guardamos el fichero en la ruta
+        try {
             Files.copy(file.getInputStream(), rutaFileName);
         } catch (IOException e) {
-            response.put("message", "Error al subir el fichero" + fileName); //Si hay un error, mostramos el error
+        //Si hay un error, mostramos mensaje de error
+            response.put("message", "Error al subir el fichero" + fileName);
             return new ResponseEntity<String>("Error al subir el fichero", HttpStatus.INTERNAL_SERVER_ERROR);
         }
-            client.setPhoto(fileName); //Guardamos el nombre del fichero en el cliente
-            clientService.save(client); //Guardamos el cliente
-            response.put("client", client); //Guardamos el cliente en el mapa de respuesta
+        //Guardamos el nombre del fichero en el cliente
+            client.setPhoto(fileName);
+        //Guardamos el cliente
+            clientService.save(client);
+        //Guardamos el cliente en el mapa de respuesta
+            response.put("client", client);
             response.put("message", "Has subido correctamete la imagen: " + fileName); //Guardamos el mensaje en el mapa de respuesta
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<Map<String,Object>>(HttpStatus.CREATED);
     }
+
+    @CrossOrigin
+    @GetMapping("/clients/upload/{id}")
+    public ResponseEntity<?> getPhoto(@PathVariable Long id) {
+        Client client = clientService.findById(id);
+        String fileName = client.getPhoto();
+        Path rutaFileName = Paths.get("src/main/resources/static/img").resolve("user.webp").toAbsolutePath();
+        File fileNameFile = rutaFileName.toFile();
+        if(fileNameFile.exists()){
+            return ResponseEntity.ok(fileNameFile);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
 }
