@@ -49,22 +49,22 @@ public class DemoApplication implements CommandLineRunner {
 		clientRepository.save(client5);
 		Client client6 = new Client("Avril", "Gar", "avirl.garz@gmail.com", Date.from(Instant.now()));
 		clientRepository.save(client6);
-		Client client7 = new Client("Ramon", "Robinson", "ramon.eamt@gmail.com",Date.from(Instant.now()));
+		Client client7 = new Client("Ramon", "Robinson", "ramon.eamt@gmail.com", Date.from(Instant.now()));
 		clientRepository.save(client7);
 		Client client8 = new Client("Imma", "Jimenez", "imma.jims@gmail.com", Date.from(Instant.now()));
 		clientRepository.save(client8);
 
-				System.out.println("Clients: OK ");
+		System.out.println("Clients: OK ");
 
-		Invoice invoice = new Invoice ( "description", "esta es una Obs", Date.from(Instant.now()), client);
+		Invoice invoice = new Invoice("description", "esta es una Obs", Date.from(Instant.now()), client);
 		invoiceRepository.save(invoice);
-		Invoice invoice1 = new Invoice ("Factura de Linus", null, Date.from(Instant.now()), client1);
+		Invoice invoice1 = new Invoice("Factura de Linus", null, Date.from(Instant.now()), client1);
 		invoiceRepository.save(invoice1);
-		Invoice invoice2 = new Invoice ( "description", "esta es una Obs", Date.from(Instant.now()),client2);
+		Invoice invoice2 = new Invoice("description", "esta es una Obs", Date.from(Instant.now()), client2);
 		invoiceRepository.save(invoice2);
-		Invoice invoice3 = new Invoice ( "description", "esta es una Obs", Date.from(Instant.now()),client3);
+		Invoice invoice3 = new Invoice("description", "esta es una Obs", Date.from(Instant.now()), client3);
 		invoiceRepository.save(invoice3);
-		Invoice invoice4 = new Invoice ( "description", "esta es una Obs", Date.from(Instant.now()),client4);
+		Invoice invoice4 = new Invoice("description", "esta es una Obs", Date.from(Instant.now()), client4);
 		invoiceRepository.save(invoice4);
 
 		System.out.println("Invoices: OK ");
@@ -92,34 +92,49 @@ public class DemoApplication implements CommandLineRunner {
 
 		System.out.println("Product: OK ");
 
-		ItemInvoice itemInvoice = new ItemInvoice (product, invoice, 2);
-		itemInvoice.setQuantity(1);
+		ItemInvoice itemInvoice = new ItemInvoice();
 		itemInvoice.setProduct(product);
+		itemInvoice.setQuantity(1);
+		invoice.getItems().add(itemInvoice);
 		invoiceRepository.save(invoice);
 
-
-		ItemInvoice itemInvoice1 = new ItemInvoice ( product1, invoice1, 2);
-		itemInvoice1.setQuantity(2);
+		ItemInvoice itemInvoice1;
+		itemInvoice1 = new ItemInvoice();
 		itemInvoice1.setProduct(product1);
+		itemInvoice1.setQuantity(2);
+		invoice1.getItems().add(itemInvoice1);
 		invoiceRepository.save(invoice1);
 
-		ItemInvoice itemInvoice2 = new ItemInvoice (product2, invoice2, 2);
+
+		ItemInvoice itemInvoice3 = new ItemInvoice();
+		itemInvoice1.setProduct(product2);
+		itemInvoice1.setQuantity(3);
+		invoice3.getItems().add(itemInvoice3);
+		invoiceRepository.save(invoice1);
+
+		ItemInvoice itemInvoice2 = new ItemInvoice();
 		itemInvoice2.setQuantity(3);
 		itemInvoice2.setProduct(product2);
+		invoice2.getItems().add(itemInvoice2);
 		invoiceRepository.save(invoice2);
 
-		ItemInvoice itemInvoice3 = new ItemInvoice (product3, invoice3, 2);
-		itemInvoice3.setQuantity(4);
-		itemInvoice3.setProduct(product3);
-		invoiceRepository.save(invoice3);
+		ItemInvoice itemInvoice4 = new ItemInvoice();
+		itemInvoice4.setQuantity(4);
+		itemInvoice4.setProduct(product1);
+		invoice3.getItems().add(itemInvoice4);
+		invoiceRepository.save(invoice4);
 
 		System.out.println("itemsInvoice: OK ");
 
 
-
-
 		System.out.println("User: OK ");
 
+		User user = new User();
+		userRepository.save(user);
+		User user1 = new User();
+		userRepository.save(user1);
+		User user2 = new User();
+		userRepository.save(user2);
 
 	}
 }
