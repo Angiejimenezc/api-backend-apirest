@@ -25,9 +25,6 @@ public class DemoApplication implements CommandLineRunner {
 	InvoiceRepository invoiceRepository;
 	@Autowired
 	UserRepository userRepository;
-	@Autowired
-
-
 
 
 	public static void main(String[] args) {
@@ -61,7 +58,7 @@ public class DemoApplication implements CommandLineRunner {
 
 		Invoice invoice = new Invoice ( "description", "esta es una Obs", Date.from(Instant.now()), client);
 		invoiceRepository.save(invoice);
-		Invoice invoice1 = new Invoice ("description", "esta es una Obs", Date.from(Instant.now()), client1);
+		Invoice invoice1 = new Invoice ("Factura de Linus", null, Date.from(Instant.now()), client1);
 		invoiceRepository.save(invoice1);
 		Invoice invoice2 = new Invoice ( "description", "esta es una Obs", Date.from(Instant.now()),client2);
 		invoiceRepository.save(invoice2);
@@ -74,52 +71,55 @@ public class DemoApplication implements CommandLineRunner {
 
 
 		Product product = new Product();
-		product.setName("Product 1");
+		product.setName("Computer");
 		product.setPrice(10.0);
 		productRepository.save(product);
 
 		Product product1 = new Product();
-		product1.setName("Product 2");
+		product1.setName("Phone");
 		product1.setPrice(20.0);
 		productRepository.save(product1);
 
 		Product product2 = new Product();
-		product2.setName("Product 3");
+		product2.setName("Tablet");
 		product2.setPrice(30.0);
 		productRepository.save(product2);
 
 		Product product3 = new Product();
-		product3.setName("Product 4");
+		product3.setName("Laptop");
 		product3.setPrice(40.0);
 		productRepository.save(product3);
 
 		System.out.println("Product: OK ");
 
-
-
-		ItemInvoice itemInvoice = new ItemInvoice ();
+		ItemInvoice itemInvoice = new ItemInvoice (product, invoice, 2);
 		itemInvoice.setQuantity(1);
 		itemInvoice.setProduct(product);
 		invoiceRepository.save(invoice);
 
-		ItemInvoice itemInvoice1 = new ItemInvoice ();
+
+		ItemInvoice itemInvoice1 = new ItemInvoice ( product1, invoice1, 2);
 		itemInvoice1.setQuantity(2);
 		itemInvoice1.setProduct(product1);
 		invoiceRepository.save(invoice1);
 
-		ItemInvoice itemInvoice2 = new ItemInvoice ();
+		ItemInvoice itemInvoice2 = new ItemInvoice (product2, invoice2, 2);
 		itemInvoice2.setQuantity(3);
 		itemInvoice2.setProduct(product2);
 		invoiceRepository.save(invoice2);
 
-		ItemInvoice itemInvoice3 = new ItemInvoice ();
+		ItemInvoice itemInvoice3 = new ItemInvoice (product3, invoice3, 2);
 		itemInvoice3.setQuantity(4);
 		itemInvoice3.setProduct(product3);
 		invoiceRepository.save(invoice3);
 
 		System.out.println("itemsInvoice: OK ");
 
+
+
+
 		System.out.println("User: OK ");
+
 
 	}
 }

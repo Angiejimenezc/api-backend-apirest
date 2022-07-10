@@ -1,11 +1,9 @@
 package com.ironhack.backend.apirest.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -20,12 +18,12 @@ public class Invoice implements Serializable {  // implements Serializable to be
     @Column(name = "invoice_date")
     @Temporal(TemporalType.DATE)
     private Date createAt;
-/*
+
    @PrePersist   // se llama a este método antes de guardar la entidad en la base de datos
     public void prePersist() {
        this.createAt = new Date();
    }
-*/
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     private Client client;
@@ -45,8 +43,6 @@ public class Invoice implements Serializable {  // implements Serializable to be
         this.client = client;
         this.items = new ArrayList<>();
     }
-
-
 
     public Long getId() {
         return id;

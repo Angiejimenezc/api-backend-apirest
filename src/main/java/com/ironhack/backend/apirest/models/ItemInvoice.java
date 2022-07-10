@@ -1,5 +1,4 @@
 package com.ironhack.backend.apirest.models;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.io.Serializable;
@@ -18,16 +17,17 @@ public class ItemInvoice implements Serializable {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="product_id")
-    private Product product;   // producto que se va a vender
-
+    private Product product;
 
     public ItemInvoice() {
     }
 
-    public ItemInvoice(Integer quantity, Product product) {
-        this.quantity = quantity;
+    public ItemInvoice(Product product, Invoice invoice, int i) {
         this.product = product;
+        this.quantity = i;
+
     }
+
 
     public Long getId() {
         return id;
@@ -52,15 +52,9 @@ public class ItemInvoice implements Serializable {
         this.quantity = quantity;
     }
     public Double getPrice() {
-        return quantity.doubleValue() * product.getPrice();
+        return quantity.doubleValue() * product.getPrice(); //calculate price of item
     }
 
-    @Override
-    public String toString() {
-        return "ItemInvoice{" +
-                "id=" + id +
-                ", quantity=" + quantity +
-                ", product=" + product +
-                '}';
-    }
+
 }
+

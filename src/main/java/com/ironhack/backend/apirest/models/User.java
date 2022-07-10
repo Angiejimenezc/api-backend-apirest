@@ -32,9 +32,6 @@ import java.util.List;
         this.enabled = enabled;
         this.roles = roles;
     }
-
-
-
     public Long getId() {
         return id;
     }
